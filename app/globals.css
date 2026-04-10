@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Vanguard Legal Partners palette (HSL derived from provided hex) */
+  --background: 213 53% 6%;          /* #070E16 */
+  --foreground: 214 52% 97%;         /* #F5F7FA */
+
+  --primary: 210 53% 11%;            /* #0D1B2A */
+  --primary-foreground: 0 0% 100%;   /* #FFFFFF */
+
+  --secondary: 240 5% 11%;           /* #1B1B1E */
+  --secondary-foreground: 214 52% 97%; /* #F5F7FA */
+
+  --accent: 43 89% 38%;              /* #B8860B */
+  --accent-foreground: 210 53% 11%;  /* #0D1B2A */
+
+  --muted: 213 47% 12%;              /* #101D2C */
+  --muted-foreground: 213 17% 76%;   /* #B7C0CC */
+
+  --card: 213 52% 9%;                /* #0B1522 */
+  --border: 210 36% 18%;             /* #1E2D40 */
+
+  --ring: 43 89% 38%;                /* #B8860B */
+}
+
+.dark {
+  --background: 213 53% 6%;
+  --foreground: 214 52% 97%;
+
+  --primary: 210 53% 11%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 240 5% 11%;
+  --secondary-foreground: 214 52% 97%;
+
+  --accent: 43 89% 38%;
+  --accent-foreground: 210 53% 11%;
+
+  --muted: 213 47% 12%;
+  --muted-foreground: 213 17% 76%;
+
+  --card: 213 52% 9%;
+  --border: 210 36% 18%;
+
+  --ring: 43 89% 38%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: theme(fontFamily.body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: theme(fontFamily.heading);
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+}
