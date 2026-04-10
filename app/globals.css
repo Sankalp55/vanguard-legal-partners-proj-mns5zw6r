@@ -5,48 +5,46 @@
 @tailwind utilities;
 
 :root {
-  /* Vanguard Legal Partners palette (HSL derived from provided hex) */
-  --background: 213 53% 6%;          /* #070E16 */
-  --foreground: 214 52% 97%;         /* #F5F7FA */
+  /* Vanguard Legal Partners palette (HSL) */
+  --background: 212 55% 6%; /* #070F18 */
+  --foreground: 214 41% 97%; /* #F5F7FA */
 
-  --primary: 210 53% 11%;            /* #0D1B2A */
-  --primary-foreground: 0 0% 100%;   /* #FFFFFF */
+  --card: 212 54% 9%; /* #0B1624 */
 
-  --secondary: 240 5% 11%;           /* #1B1B1E */
-  --secondary-foreground: 214 52% 97%; /* #F5F7FA */
+  --border: 210 41% 17%; /* #1A2B3E */
+  --ring: 43 89% 38%; /* #B8860B */
 
-  --accent: 43 89% 38%;              /* #B8860B */
-  --accent-foreground: 210 53% 11%;  /* #0D1B2A */
+  --primary: 212 53% 11%; /* #0D1B2A */
+  --primary-foreground: 0 0% 100%; /* #FFFFFF */
 
-  --muted: 213 47% 12%;              /* #101D2C */
-  --muted-foreground: 213 17% 76%;   /* #B7C0CC */
+  --secondary: 240 5% 11%; /* #1B1B1E */
+  --secondary-foreground: 0 0% 100%; /* #FFFFFF */
 
-  --card: 213 52% 9%;                /* #0B1522 */
-  --border: 210 36% 18%;             /* #1E2D40 */
+  --accent: 43 89% 38%; /* #B8860B */
 
-  --ring: 43 89% 38%;                /* #B8860B */
+  --muted: 210 56% 14%; /* #0F2236 */
+  --muted-foreground: 213 16% 76%; /* #B7C0CC */
 }
 
 .dark {
-  --background: 213 53% 6%;
-  --foreground: 214 52% 97%;
+  --background: 212 55% 6%;
+  --foreground: 214 41% 97%;
 
-  --primary: 210 53% 11%;
+  --card: 212 54% 9%;
+
+  --border: 210 41% 17%;
+  --ring: 43 89% 38%;
+
+  --primary: 212 53% 11%;
   --primary-foreground: 0 0% 100%;
 
   --secondary: 240 5% 11%;
-  --secondary-foreground: 214 52% 97%;
+  --secondary-foreground: 0 0% 100%;
 
   --accent: 43 89% 38%;
-  --accent-foreground: 210 53% 11%;
 
-  --muted: 213 47% 12%;
-  --muted-foreground: 213 17% 76%;
-
-  --card: 213 52% 9%;
-  --border: 210 36% 18%;
-
-  --ring: 43 89% 38%;
+  --muted: 210 56% 14%;
+  --muted-foreground: 213 16% 76%;
 }
 
 @layer base {
@@ -65,10 +63,5 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: theme(fontFamily.heading);
-  }
-
-  :focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 }

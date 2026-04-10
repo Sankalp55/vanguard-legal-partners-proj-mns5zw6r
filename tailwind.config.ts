@@ -22,8 +22,7 @@ const config: Config = {
           foreground: "hsl(var(--secondary-foreground))"
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))"
+          DEFAULT: "hsl(var(--accent))"
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -33,11 +32,6 @@ const config: Config = {
       fontFamily: {
         heading: ["Merriweather", "serif"],
         body: ["Open Sans", "ui-sans-serif", "system-ui", "sans-serif"]
-      },
-      borderRadius: {
-        lg: "0.5rem",
-        md: "calc(0.5rem - 2px)",
-        sm: "calc(0.5rem - 4px)"
       }
     }
   },

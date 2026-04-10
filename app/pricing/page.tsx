@@ -1,256 +1,258 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 import { PricingTable } from '@/components/blocks/PricingTable'
+import { FeaturesGrid } from '@/components/blocks/FeaturesGrid'
 import { FAQAccordion } from '@/components/blocks/FAQAccordion'
-import { TestimonialsAnimated } from '@/components/blocks/TestimonialsAnimated'
-import { CTASplit } from '@/components/blocks/CTASplit'
+import { CTASparkles } from '@/components/blocks/CTASparkles'
 
-import { BentoGrid, BentoGridItem } from '@/components/ui/effects/BentoGrid'
 import { TracingBeam } from '@/components/ui/effects/TracingBeam'
+import { BentoGrid, BentoGridItem } from '@/components/ui/effects/BentoGrid'
+import { MovingBorder } from '@/components/ui/effects/MovingBorder'
 
 import { GridBackground } from '@/components/ui/backgrounds/GridBackground'
-import { DottedGlowBackground } from '@/components/ui/backgrounds/DottedGlowBackground'
 
-const sectionTransition = { duration: 0.6 }
+const sectionFade = {
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 },
+} as const
 
 export default function PricingPage() {
   return (
     <div className="bg-background">
       {/* HERO */}
-      <section className="relative overflow-hidden py-24 md:py-32">
-        <div className="absolute inset-0 -z-10">
+      <section className="relative overflow-hidden py-20 md:py-32">
+        <div className="absolute inset-0">
           <GridBackground />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={sectionTransition}
-          className="mx-auto max-w-6xl px-6 md:px-8 text-center"
-        >
-          <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary tracking-wider uppercase mb-4">
-            Pricing
-          </div>
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl leading-[1.05] bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            Transparent structures for complex legal work.
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Choose fixed-fee phases where possible, or hourly arrangements for open-ended matters. We scope conservatively and communicate
-            early.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground">
-            Pricing ranges are illustrative; final fees depend on scope, urgency, and complexity.
-          </p>
+        <motion.div {...sectionFade} className="relative mx-auto max-w-7xl px-6">
+          <div className="grid gap-12 md:grid-cols-12 md:items-center">
+            <div className="md:col-span-7">
+              <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary tracking-wider uppercase mb-4">
+                Pricing
+              </div>
+              <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl leading-[1.05]">
+                Transparent engagement options—built for corporate realities.
+              </h1>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-2xl">
+                Choose a structure that matches your matter: fixed-scope diligence, monthly advisory, or litigation defense planning. Final fees depend on complexity and urgency.
+              </p>
 
-          <div className="mt-10 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+              <div className="mt-8 flex flex-wrap gap-3">
+                <MovingBorder duration={3000}>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all"
+                  >
+                    Get an estimate
+                  </Link>
+                </MovingBorder>
+                <Link
+                  href="#plans"
+                  className="rounded-full border border-border bg-card px-8 py-4 text-foreground hover:bg-muted/40 transition-colors"
+                >
+                  See what’s included
+                </Link>
+              </div>
+            </div>
+
+            <div className="md:col-span-5">
+              <div className="relative overflow-hidden rounded-3xl border border-border bg-card">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                <div className="group relative aspect-[4/5]">
+                  <Image
+                    src="/images/hero.png"
+                    alt="Pricing and engagement visual"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-14 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </motion.div>
       </section>
 
-      {/* PRICING TABLE */}
-      <section className="relative bg-muted/30 py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <DottedGlowBackground />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={sectionTransition}
-          className="mx-auto max-w-7xl px-6 md:px-8"
-        >
+      {/* PLANS */}
+      <section id="plans" className="relative bg-muted/30 py-20 md:py-32">
+        <motion.div {...sectionFade} className="mx-auto max-w-7xl px-6">
           <PricingTable
-            headline="Common engagement models"
-            subheadline="Designed for predictability without sacrificing rigor."
+            headline="Engagement models"
+            subheadline="Designed for CFO clarity and GC control—without sacrificing senior attention."
             tiers={[
               {
                 name: 'Advisory Retainer',
                 price: '$7,500–$15,000',
-                period: '/ mo',
-                features: ['Priority response window', 'Contract and governance review', 'Monthly risk checkpoint memo', 'Discounted hourly for overflow'],
-                ctaLabel: 'Discuss retainer fit',
+                period: '/month',
+                features: [
+                  'Priority response SLAs',
+                  'Contract review + negotiation support',
+                  'Board and governance guidance',
+                  'Quarterly risk review memo',
+                ],
+                ctaLabel: 'Discuss retainer',
                 ctaHref: '/contact',
               },
               {
-                name: 'Transaction Phases',
-                price: '$25,000–$120,000+',
-                period: '',
+                name: 'Transaction Sprint',
+                price: '$18,000–$45,000',
+                period: 'fixed scope',
+                features: [
+                  'Diligence checklist + red-flag reporting',
+                  'Core agreement drafting/markup',
+                  'Closing checklist and coordination',
+                  'Optional: specialty counsel coordination',
+                ],
+                ctaLabel: 'Plan a sprint',
+                ctaHref: '/contact',
                 highlighted: true,
-                features: ['Phase scoping + assumptions', 'Diligence + issue tracker', 'Drafting + negotiation support', 'Closing coordination'],
-                ctaLabel: 'Scope a transaction',
-                ctaHref: '/contact',
               },
               {
-                name: 'Disputes & Investigations',
-                price: 'Hourly',
-                period: 'or capped',
-                features: ['Rapid triage + response plan', 'Preservation + interview support', 'Motion practice strategy', 'Executive briefings'],
-                ctaLabel: 'Talk to counsel',
+                name: 'Defense & Investigations',
+                price: 'Custom',
+                period: 'phased',
+                features: [
+                  'Early case assessment + exposure map',
+                  'Privilege protocol and document strategy',
+                  'Regulator response planning',
+                  'Motion practice / settlement positioning',
+                ],
+                ctaLabel: 'Request a defense consult',
                 ctaHref: '/contact',
               },
             ]}
           />
+
+          <div className="mt-8 rounded-3xl border border-border bg-card p-6 text-sm text-muted-foreground">
+            All ranges are illustrative. We confirm scope and fees in a written engagement letter after conflicts review.
+          </div>
+
+          <div className="mt-14 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </motion.div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      {/* INCLUDED — Bento */}
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        <div className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -bottom-24 right-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
 
-      {/* COST DRIVERS — BENTO */}
-      <section className="relative py-24 md:py-32">
-        <div className="absolute inset-0 -z-10">
-          <GridBackground />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={sectionTransition}
-          className="mx-auto max-w-7xl px-6 md:px-8"
-        >
+        <motion.div {...sectionFade} className="relative mx-auto max-w-7xl px-6">
           <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary tracking-wider uppercase mb-4">
-            Cost Drivers
+            Standard in every matter
           </div>
           <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            What influences cost
+            What’s included in every engagement
           </h2>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            We explain drivers early so you can plan with confidence.
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
+            Senior-led work, disciplined documentation, and communication built for executives and boards.
           </p>
 
           <div className="mt-12">
             <BentoGrid>
               {[
-                { t: 'Urgency + deadlines', d: 'Accelerated timelines require more parallel work and senior oversight.', img: '/images/hero.png' },
-                { t: 'Stakeholder complexity', d: 'More parties, lenders, regulators, or investors increases coordination effort.', img: '/images/office.png' },
-                { t: 'Document volume + quality', d: 'Diligence efficiency depends on organization and completeness of records.', img: '/images/meeting.png' },
-                { t: 'Novelty + regulatory sensitivity', d: 'Special regimes and uncommon structures increase analysis and drafting time.', img: '/images/handshake.png' },
-              ].map((x, idx) => (
+                {
+                  title: 'Senior attorney ownership',
+                  description: 'Direct partner involvement from intake through outcome.',
+                  header: '/images/team-1.png',
+                  className: 'md:col-span-2',
+                },
+                {
+                  title: 'Decision-ready deliverables',
+                  description: 'Memos and drafts designed for board packets and audit trails.',
+                  header: '/images/office.png',
+                },
+                {
+                  title: 'Confidentiality-first workflow',
+                  description: 'Privilege protocols and secure handling expectations.',
+                  header: '/images/meeting.png',
+                },
+                {
+                  title: 'Timeline discipline',
+                  description: 'Structured milestones and escalation control.',
+                  header: '/images/handshake.png',
+                },
+              ].map((item, i) => (
                 <BentoGridItem
-                  key={x.t}
-                  title={x.t}
-                  description={x.d}
-                  className={idx === 0 ? 'md:col-span-2' : undefined}
+                  key={i}
+                  title={item.title}
+                  description={item.description}
+                  className="group"
                   header={
-                    <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-border bg-card">
-                      <Image src={x.img} alt={x.t} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                    <div className="relative h-40 w-full overflow-hidden rounded-2xl border border-border bg-card">
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                      <Image
+                        src={item.header}
+                        alt={`${item.title} visual`}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
                     </div>
                   }
                 />
               ))}
             </BentoGrid>
           </div>
+
+          <div className="mt-14 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </motion.div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      {/* FAQ — TracingBeam wrapper */}
+      <section className="relative bg-muted/30 py-20 md:py-32">
+        <motion.div {...sectionFade} className="mx-auto max-w-7xl px-6">
+          <TracingBeam>
+            <div className="rounded-3xl border border-border bg-card p-8 shadow-2xl">
+              <FAQAccordion
+                headline="Pricing FAQ"
+                subheadline="Common questions from GCs, CFOs, and founders."
+                items={[
+                  {
+                    question: 'Do you offer flat fees?',
+                    answer:
+                      'Yes—when scope can be defined (e.g., diligence sprints, document packages, specific motion work). We’ll confirm assumptions and exclusions in writing.',
+                  },
+                  {
+                    question: 'Can you coordinate with existing in-house counsel?',
+                    answer:
+                      'Absolutely. We can operate as outside counsel, specialty counsel, or an overflow team with clear division of responsibilities.',
+                  },
+                  {
+                    question: 'How do you handle urgent matters?',
+                    answer:
+                      'We can mobilize quickly after conflicts clearance. Rush timelines may affect fees depending on staffing and after-hours requirements.',
+                  },
+                  {
+                    question: 'Do you require a long-term commitment for retainers?',
+                    answer:
+                      'No. Retainers are typically month-to-month with defined scope and response expectations.',
+                  },
+                ]}
+              />
+            </div>
+          </TracingBeam>
 
-      {/* TESTIMONIALS — TRACING BEAM */}
-      <section className="relative bg-muted/30 py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <DottedGlowBackground />
-        </div>
-
-        <TracingBeam>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={sectionTransition}
-            className="mx-auto max-w-7xl px-6 md:px-8"
-          >
-            <TestimonialsAnimated
-              headline="Predictable, professional, and responsive."
-              subheadline="Pricing is only valuable when paired with proactive communication."
-              testimonials={[
-                {
-                  quote: 'They scoped the matter into phases, so leadership always knew what was next—and what it would take.',
-                  name: 'COO',
-                  role: 'Healthcare services company',
-                  company: 'Client',
-                  imageUrl: '/images/team-1.png',
-                },
-                {
-                  quote: 'No surprises. Clear assumptions and early flags when scope changed.',
-                  name: 'General Counsel',
-                  role: 'Fintech company',
-                  company: 'Client',
-                  imageUrl: '/images/team-2.png',
-                },
-                {
-                  quote: 'We felt like we had a disciplined project plan, not just legal advice.',
-                  name: 'VP, Corporate Development',
-                  role: 'Industrial group',
-                  company: 'Client',
-                  imageUrl: '/images/team-3.png',
-                },
-              ]}
-            />
-          </motion.div>
-        </TracingBeam>
-      </section>
-
-      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-      {/* FAQ */}
-      <section className="relative py-24 md:py-32">
-        <div className="absolute inset-0 -z-10">
-          <GridBackground />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={sectionTransition}
-          className="mx-auto max-w-6xl px-6 md:px-8"
-        >
-          <FAQAccordion
-            headline="Pricing FAQ"
-            subheadline="A few practical answers before you reach out."
-            items={[
-              {
-                question: 'Do you offer free consultations?',
-                answer:
-                  'We offer a brief introductory call to confirm fit and urgency. Substantive legal advice begins after conflicts checks and engagement confirmation.',
-              },
-              {
-                question: 'Can you cap fees for litigation stages?',
-                answer:
-                  'Often yes—e.g., early case assessment, motion to dismiss, or targeted discovery—depending on known variables.',
-              },
-              {
-                question: 'How do you handle scope changes?',
-                answer:
-                  'We flag scope changes early, propose options, and confirm approval before proceeding beyond the agreed scope.',
-              },
-            ]}
-          />
+          <div className="mt-14 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </motion.div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-      {/* CTA */}
-      <section className="relative py-24 md:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={sectionTransition}
-          className="mx-auto max-w-7xl px-6 md:px-8"
-        >
-          <CTASplit
-            headline="Want a conservative scope and clear assumptions?"
-            description="Tell us timing, stakeholders, and objectives. We’ll propose a structure designed for predictability and credibility."
-            ctaLabel="Request a quote"
+      {/* CTA (assigned) */}
+      <section className="relative py-20 md:py-32">
+        <motion.div {...sectionFade} className="mx-auto max-w-7xl px-6">
+          <CTASparkles
+            headline="Get clarity on scope and cost."
+            description="Send a short summary and we’ll propose a recommended engagement model within one business day."
+            ctaLabel="Request estimate"
             ctaHref="/contact"
-            secondaryCtaLabel="See practice areas"
+            secondaryCtaLabel="Review practice areas"
             secondaryCtaHref="/practice-areas"
           />
         </motion.div>

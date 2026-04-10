@@ -1,77 +1,87 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Merriweather, Open_Sans } from 'next/font/google'
-import { NavbarAnimated } from '@/components/blocks/NavbarAnimated'
+import { NavbarFloating } from '@/components/blocks/NavbarFloating'
 import { FooterMultiColumn } from '@/components/blocks/FooterMultiColumn'
 
 const bodyFont = Open_Sans({
   subsets: ['latin'],
   variable: '--font-body',
-  display: 'swap',
 })
 
 const headingFont = Merriweather({
   subsets: ['latin'],
-  variable: '--font-heading',
-  display: 'swap',
   weight: ['300', '400', '700', '900'],
+  variable: '--font-heading',
 })
 
 export const metadata: Metadata = {
   title: 'Vanguard Legal Partners | Corporate Law Firm in Chicago',
   description:
-    'Vanguard Legal Partners is a Chicago corporate law firm advising on mergers & acquisitions, corporate restructuring, securities litigation, and white-collar defense. Partner-led, discreet, and outcome-driven.',
+    'Vanguard Legal Partners is a Chicago corporate law firm handling M&A, corporate restructuring, securities litigation, and white-collar defense. Request a confidential consultation.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const navItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Practice Areas', href: '/practice-areas' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'About', href: '/about' },
+    { label: 'Insights', href: '/insights' },
+    { label: 'Contact', href: '/contact' },
+  ]
+
   return (
     <html lang="en" className="dark">
-      <body className={`${bodyFont.className} ${headingFont.variable} bg-background text-foreground antialiased`}>
-        <NavbarAnimated
+      <body
+        className={`${bodyFont.className} ${headingFont.variable} bg-background text-foreground antialiased`}
+      >
+        <NavbarFloating
           logo="Vanguard Legal Partners"
-          navItems={[
-            { label: 'Home', href: '/' },
-            { label: 'Practice Areas', href: '/practice-areas' },
-            { label: 'Approach', href: '/approach' },
-            { label: 'Pricing', href: '/pricing' },
-            { label: 'About', href: '/about' },
-            { label: 'Contact', href: '/contact' },
-          ]}
-          ctaLabel="Confidential Consultation"
+          navItems={navItems}
+          ctaLabel="Request Consultation"
           ctaHref="/contact"
         />
-        <main className="min-h-[70vh]">{children}</main>
+        <main>{children}</main>
         <FooterMultiColumn
           brand="Vanguard Legal Partners"
-          description="Corporate counsel built for high-stakes decisions. Partner-led matters, board-ready guidance, and discreet crisis response."
+          description="Corporate counsel built for decisive moments—transaction precision with litigation-ready discipline."
           columns={[
-            {
-              title: 'Vanguard Legal Partners',
-              links: [
-                { label: '200 W Madison St, Suite 2100', href: '/contact' },
-                { label: 'Chicago, IL 60606', href: '/contact' },
-                { label: '(312) 555-0147', href: 'tel:+13125550147' },
-                { label: 'intake@vanguardlegalpartners.com', href: 'mailto:intake@vanguardlegalpartners.com' },
-              ],
-            },
             {
               title: 'Firm',
               links: [
-                { label: 'Practice Areas', href: '/practice-areas' },
-                { label: 'Approach', href: '/approach' },
-                { label: 'Pricing', href: '/pricing' },
                 { label: 'About', href: '/about' },
+                { label: 'Practice Areas', href: '/practice-areas' },
+                { label: 'Pricing', href: '/pricing' },
+                { label: 'Insights', href: '/insights' },
               ],
             },
             {
-              title: 'Legal',
+              title: 'Contact',
               links: [
-                { label: 'Disclaimer', href: '/contact' },
-                { label: 'Privacy (placeholder)', href: '/contact' },
+                { label: '(312) 555-0147', href: 'tel:+13125550147' },
+                {
+                  label: 'intake@vanguardlegalpartners.com',
+                  href: 'mailto:intake@vanguardlegalpartners.com',
+                },
+                { label: 'Chicago Office', href: '/contact' },
+              ],
+            },
+            {
+              title: 'Disclosures',
+              links: [
+                {
+                  label: 'No Attorney-Client Relationship Notice',
+                  href: '/contact#contact-form',
+                },
+                {
+                  label: 'Representative Matters Disclaimer',
+                  href: '/#case-results',
+                },
               ],
             },
           ]}
-          copyright="© 2026 Vanguard Legal Partners. Attorney advertising. Prior results do not guarantee a similar outcome."
+          copyright="© 2026 Vanguard Legal Partners. All rights reserved. Attorney Advertising. Prior results do not guarantee a similar outcome."
         />
       </body>
     </html>
